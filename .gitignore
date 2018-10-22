@@ -2,7 +2,7 @@
 **/build/
 **/bin/
 **/.settings/
-
+**/.idea/workspace.xml
 **/.project
 **/.classpath
 **/rebel.xml
