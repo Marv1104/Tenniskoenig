@@ -1,1 +1,2 @@
-com\tco\HeaderView.class
+com\tco\view\HeaderView.class
+com\tco\view\DashView.class
