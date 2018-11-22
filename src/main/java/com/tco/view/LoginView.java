@@ -42,12 +42,16 @@ public class LoginView extends VerticalLayout {
 
         //btnOk.setText(BUTTON_CAPTION_OK);
         //btnOk.setId(ID_BUTTON_OK);
+
         btnOk.addClickListener(buttonClickEvent ->  {
             boolean isValid = checkLoginData(login.getValue(), password.getValue());
-            clearInputFields();
-            btnOk.getUI().ifPresent(ui -> ui.navigate("main"));
+            if(isValid){
+                btnOk.getUI().ifPresent(ui -> ui.navigate("main"));
+            }
+            else {
+                clearInputFields();
+            }
         });
-
         //btnCancel.setId(ID_BUTTON_CANCEL);
         //btnCancel.setText(BUTTON_CAPTION_CANCEL);
         btnCancel.addClickListener(buttonClickEvent ->
@@ -63,14 +67,5 @@ public class LoginView extends VerticalLayout {
         return ! (Objects.isNull(login) || Objects.isNull(password))
                 && (! (login.isEmpty() || password.isEmpty())
                 && (login.equals("admin") && password.equals("admin")));
-    }
-
-    private Component mainView() {
-        Button logOut = new Button("LogOut");
-        logOut.addClickListener(e -> {
-            getCurrent().getSession().close();
-            logOut.getUI().ifPresent(ui -> ui.navigate("main"));
-        });
-        return logOut;
     }
 }
