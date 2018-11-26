@@ -1,25 +1,29 @@
 package com.tco.view;
 
 
-import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.Composite;
-import com.vaadin.flow.component.Text;
-import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.*;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.polymertemplate.PolymerTemplate;
 import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.router.AfterNavigationEvent;
+import com.vaadin.flow.router.AfterNavigationObserver;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.server.InitialPageSettings;
+import com.vaadin.flow.server.PageConfigurator;
+import com.vaadin.flow.templatemodel.TemplateModel;
 
 import java.util.Objects;
 
 import static com.vaadin.flow.component.UI.getCurrent;
+@Tag("")
 
-@Route("")
+@Route("login")
 @PageTitle("Login required")
-public class LoginView extends VerticalLayout {
+public class LoginView extends PolymerTemplate<LoginView.Model> implements PageConfigurator, AfterNavigationObserver {
     private final Text text = new Text("Login benötigt!");
     private final TextField login = new TextField("Nutzername");
     private final PasswordField password = new PasswordField("Passwort");
@@ -27,13 +31,13 @@ public class LoginView extends VerticalLayout {
     private final Button btnCancel = new Button("Cancel");
     private final HorizontalLayout buttons = new HorizontalLayout(btnOk,btnCancel);
 
-    public LoginView(){
-        add(login,password,buttons);
-        postProcess();
+
+    public interface Model extends TemplateModel{
+        void setError(boolean error);
     }
 
     public void postProcess(){
-        setSizeFull();
+        //setSizeFull();
         //login.setId(ID_TEXTFIELD_LOGIN);
         //login.setLabel(BUTTON_CAPTION_LOGIN); //TODO i18n
 
@@ -67,5 +71,15 @@ public class LoginView extends VerticalLayout {
         return ! (Objects.isNull(login) || Objects.isNull(password))
                 && (! (login.isEmpty() || password.isEmpty())
                 && (login.equals("admin") && password.equals("admin")));
+    }
+
+    @Override
+    public void afterNavigation(AfterNavigationEvent afterNavigationEvent) {
+
+    }
+
+    @Override
+    public void configurePage(InitialPageSettings initialPageSettings) {
+
     }
 }
