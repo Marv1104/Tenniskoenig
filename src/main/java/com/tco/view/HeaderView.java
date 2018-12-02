@@ -25,5 +25,7 @@ public class HeaderView extends HorizontalLayout {
         add(btnLogout);
         setAlignItems(Alignment.CENTER);
         setJustifyContentMode(JustifyContentMode.END);
+        btnLogout.addClickListener(buttonClickEvent ->
+        btnLogout.getUI().ifPresent(ui -> ui.navigate("")));
     }
 }
