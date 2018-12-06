@@ -1,0 +1,22 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name = "com.tco.model.Played" table = "played">
+
+        <meta attribute = "class-description">
+            This class show the car detail, and mapping for the DB
+        </meta>
+
+        <id name = "playerID" type = "int" column = "id">
+            <generator class="native"/>
+        </id>
+
+        <property name = "gameID" column = "GameID" type = "int"/>
+        <property name = "userID" column = "UserID" type = "int"/>
+        <property name = "points" column = "Points" type = "int"/>
+
+    </class>
+</hibernate-mapping>

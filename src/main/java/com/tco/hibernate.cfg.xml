@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+
+        <!-- connection to the database -->
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/autoschema?useSSL=false&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">rootpwpw</property>
+
+        <!-- autocommit false -->
+        <property name="hibernate.connection.autocommit">false</property>
+
+        <!-- to display sql query generated when running the program -->
+        <property name="show_sql">true</property>
+        <property name="format_sql">true</property>
+        <property name="use_sql_comments">true</property>
+
+        <!-- for jdbc transaction -->
+        <property name="hibernate.transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>
+
+        <!-- mapping file -->
+        <!--<mapping class="com.tco.model.Played"/>
+        <mapping class="com.tco.model.Game"/>
+        <mapping class="com.tco.model.User"/>-->
+        <mapping resource="Game.hbm.xml"/>
+        <mapping resource="User.hbm.xml"/>
+        <mapping resource="Played.hbm.xml"/>
+
+    </session-factory>
+</hibernate-configuration>
