@@ -14,9 +14,10 @@
             <generator class="native"/>
         </id>
 
-        <property name = "vorName" column = "Vorname" type = "string"/>
-        <property name = "nachName" column = "Nachname" type = "string"/>
-        <property name = "geschlechtW" column = "GeschlechtW" type = "boolean"/>
+        <property name = "vorname" column = "vorname" type = "string"/>
+        <property name = "nachname" column = "nachname" type = "string"/>
+        <property name = "geschlechtw" column = "geschlechtw" type = "boolean"/>
+        <property name = "admin" column = "admin" type = "boolean"/>
 
     </class>
 </hibernate-mapping>

@@ -16,27 +16,12 @@ import org.hibernate.cfg.Configuration;
  */
 @Route("main")
 public class MainView extends VerticalLayout {
-        private static SessionFactory factory;
 
     public MainView() {
         HeaderView headerView = new HeaderView();
         DashView dashView = new DashView();
         add(headerView);
         add(dashView);
-
-
-        Configuration cfg = new Configuration();
-        cfg.configure("hibernate.cfg.xml");
-        factory = cfg.buildSessionFactory();
-
-        Session session = factory.openSession();
-
-        session.close();
-
-        //ManageAuto MA = new ManageAuto();
-
-        // Hinzufügen einiger Autos
-        //Integer autoID1 = MA.addAuto("Fiat", "Punto", 50, "grün");
 
     }
 }

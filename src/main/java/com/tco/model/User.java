@@ -9,18 +9,28 @@ import java.io.Serializable;
 public class User implements Serializable {
 
     private int id;
-    private String vorName;
-    private String nachName;
-    private boolean geschlechtW;
+    private String vorname;
+    private String nachname;
+    private boolean geschlechtw;
+    private boolean admin;
 
     public User() {
     }
 
-    public User(int id, String vorName, String nachName, boolean geschlechtW) {
-        this.id = id;
-        this.vorName = vorName;
-        this.nachName = nachName;
-        this.geschlechtW = geschlechtW;
+    public User(String vorName, String nachname, boolean geschlechtw, boolean admin) {
+        super();
+        this.vorname = vorName;
+        this.nachname = nachname;
+        this.geschlechtw = geschlechtw;
+        this.admin = admin;
+    }
+
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
     }
 
     @Id
@@ -32,27 +42,27 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public String getVorName() {
-        return vorName;
+    public String getVorname() {
+        return vorname;
     }
 
-    public void setVorName(String vorName) {
-        this.vorName = vorName;
+    public void setVorname(String vorname) {
+        this.vorname = vorname;
     }
 
-    public String getNachName() {
-        return nachName;
+    public String getNachname() {
+        return nachname;
     }
 
-    public void setNachName(String nachName) {
-        this.nachName = nachName;
+    public void setNachname(String nachname) {
+        this.nachname = nachname;
     }
 
-    public boolean isGeschlechtW() {
-        return geschlechtW;
+    public boolean isGeschlechtw() {
+        return geschlechtw;
     }
 
-    public void setGeschlechtW(boolean geschlechtW) {
-        this.geschlechtW = geschlechtW;
+    public void setGeschlechtw(boolean geschlechtW) {
+        this.geschlechtw = geschlechtW;
     }
 }
