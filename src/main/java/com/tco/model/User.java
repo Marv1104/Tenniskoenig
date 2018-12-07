@@ -13,6 +13,13 @@ public class User implements Serializable {
     private String nachName;
     private boolean geschlechtW;
 
+    public User(int id, String vorName, String nachName, boolean geschlechtW) {
+        this.id = id;
+        this.vorName = vorName;
+        this.nachName = nachName;
+        this.geschlechtW = geschlechtW;
+    }
+
     @Id
     public int getId() {
         return id;

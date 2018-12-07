@@ -1,6 +1,5 @@
 package com.tco.model;
 
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.io.Serializable;
@@ -19,6 +18,19 @@ public class Game implements Serializable {
     private int gameSetTeam2;
     private Date gameDate;
     private Time playTime;
+
+    public Game(int gameID, int player1Team1, int player2Team2, int player3Team1, int player4Team2, String results, int gameSetTeam1, int gameSetTeam2, Date gameDate, Time playTime) {
+        this.gameID = gameID;
+        this.player1Team1 = player1Team1;
+        this.player2Team2 = player2Team2;
+        this.player3Team1 = player3Team1;
+        this.player4Team2 = player4Team2;
+        this.results = results;
+        this.gameSetTeam1 = gameSetTeam1;
+        this.gameSetTeam2 = gameSetTeam2;
+        this.gameDate = gameDate;
+        this.playTime = playTime;
+    }
 
     @Id
     public int getGameID() {
