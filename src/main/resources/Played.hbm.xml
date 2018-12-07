@@ -10,7 +10,7 @@
             This class show the car detail, and mapping for the DB
         </meta>
 
-        <id name = "playerID" type = "int" column = "id">
+        <id name = "playedID" type = "int" column = "playedID">
             <generator class="native"/>
         </id>
 

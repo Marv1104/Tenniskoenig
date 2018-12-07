@@ -14,15 +14,15 @@
             <generator class="native"/>
         </id>
 
-        <property name = "player1Team1" column = "Player1Team1" type = "int"/>
-        <property name = "player2Team2" column = "Player2Team2" type = "int"/>
-        <property name = "player3Team1" column = "Player3Team1" type = "int"/>
-        <property name = "player4Team2" column = "Player4Team2" type = "int"/>
-        <property name = "results" column = "Results" type = "string"/>
-        <property name = "gameSetTeam1" column = "GameSetTeam1" type = "int"/>
-        <property name = "gameSetTeam2" column = "GameSetTeam2" type = "int"/>
-        <property name = "gameDate" column = "GameDate" type = "date"/>
-        <property name = "playTime" column = "PlayTime" type = "time"/>
+        <property name = "player1Team1" column = "player1Team1" type = "int"/>
+        <property name = "player2Team2" column = "player2Team2" type = "int"/>
+        <property name = "player3Team1" column = "player3Team1" type = "int"/>
+        <property name = "player4Team2" column = "player4Team2" type = "int"/>
+        <property name = "results" column = "results" type = "string"/>
+        <property name = "gameSetTeam1" column = "gameSetTeam1" type = "int"/>
+        <property name = "gameSetTeam2" column = "gameSetTeam2" type = "int"/>
+        <property name = "gameDate" column = "gameDate" type = "date"/>
+        <property name = "playTime" column = "glayTime" type = "time"/>
 
     </class>
 </hibernate-mapping>

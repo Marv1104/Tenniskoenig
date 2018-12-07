@@ -7,6 +7,7 @@ import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
@@ -27,6 +28,15 @@ public class MainView extends VerticalLayout {
         Configuration cfg = new Configuration();
         cfg.configure("hibernate.cfg.xml");
         factory = cfg.buildSessionFactory();
+
+        Session session = factory.openSession();
+        try {
+            wait(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        session.close();
 
         //ManageAuto MA = new ManageAuto();
 

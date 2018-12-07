@@ -9,7 +9,7 @@ public class Played implements Serializable {
     private int gameID;
     private int userID;
     private int points;
-    private int playerID;
+    private int playedID;
 @Id
     public int getGameID() {
         return gameID;
@@ -35,11 +35,11 @@ public class Played implements Serializable {
         this.points = points;
     }
 
-    public int getPlayerID() {
-        return playerID;
+    public int getPlayedID() {
+        return playedID;
     }
 
-    public void setPlayerID(int playerID) {
-        this.playerID = playerID;
+    public void setPlayedID(int playerID) {
+        this.playedID = playerID;
     }
 }
