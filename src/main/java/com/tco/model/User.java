@@ -13,6 +13,9 @@ public class User implements Serializable {
     private String nachName;
     private boolean geschlechtW;
 
+    public User() {
+    }
+
     public User(int id, String vorName, String nachName, boolean geschlechtW) {
         this.id = id;
         this.vorName = vorName;

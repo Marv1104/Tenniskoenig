@@ -30,11 +30,6 @@ public class MainView extends VerticalLayout {
         factory = cfg.buildSessionFactory();
 
         Session session = factory.openSession();
-        try {
-            wait(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
         session.close();
 
