@@ -2,6 +2,7 @@ package com.tco;
 
 import com.tco.view.DashView;
 import com.tco.view.HeaderView;
+import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.notification.Notification;
@@ -19,6 +20,11 @@ public class MainView extends VerticalLayout {
         DashView dashView = new DashView();
         add(headerView);
         add(dashView);
-
+        // Testing purposes
+        Button enterMatch = new Button("Spiel eintragen");
+        enterMatch.addClickListener(buttonClickEvent -> {
+            enterMatch.getUI().ifPresent(ui -> ui.navigate("enterMatch"));
+        });
+        add(enterMatch);
     }
 }
