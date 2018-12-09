@@ -2,6 +2,7 @@ package com.tco.view;
 
 import com.tco.components.BlankLabel;
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.formlayout.FormLayout;
@@ -27,6 +28,8 @@ public class EnterMatchView extends VerticalLayout {
     private final TextField setsPlayer2 = new TextField("Sätze Spieler 2");
     private final TextField timePlayed = new TextField("Gespielte Zeit");
 
+    private Button submit = new Button("Spiel eintragen");
+
 
     public EnterMatchView() {
         // testing purposes
@@ -44,6 +47,7 @@ public class EnterMatchView extends VerticalLayout {
                 add(getOneVsOne());
             }
         });
+        add(submit);
     }
 
     /**
