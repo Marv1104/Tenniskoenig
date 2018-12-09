@@ -19,14 +19,13 @@ public class EnterMatchView extends VerticalLayout {
     private final ComboBox player3 = new ComboBox("Spieler 3");
     private final ComboBox player4 = new ComboBox("Spieler 4");
     private final Checkbox teammatch = new Checkbox("Doppel");
-    private final TextField setsTeam1 = new TextField("Sätze Mannschaft 1");
-    private final TextField setsTeam2 = new TextField("Sätze Mannschaft 2");
-    private final TextField set1 = new TextField("Satz 1");
-    private final TextField set2 = new TextField("Satz 2");
-    private final TextField set3 = new TextField("Satz 3 (optional)");
-    private final TextField setsPlayer1 = new TextField("Sätze Spieler 1");
-    private final TextField setsPlayer2 = new TextField("Sätze Spieler 2");
-    private final TextField timePlayed = new TextField("Gespielte Zeit");
+    private final TextField set1Team1 = new TextField();
+    private final TextField set1Team2 = new TextField();
+    private final TextField set2Team1 = new TextField();
+    private final TextField set2Team2 = new TextField();
+    private final TextField set3Team1 = new TextField();
+    private final TextField set3Team2 = new TextField();
+    private final TextField timePlayed = new TextField();
 
     private Button submit = new Button("Spiel eintragen");
 
@@ -41,12 +40,15 @@ public class EnterMatchView extends VerticalLayout {
             if (teammatch.getValue()) {
                 removeAll();
                 add(getTeammatch());
+                add(submit);
             }
             if (!teammatch.getValue()) {
                 removeAll();
                 add(getOneVsOne());
+                add(submit);
             }
         });
+
         add(submit);
     }
 
@@ -150,16 +152,17 @@ public class EnterMatchView extends VerticalLayout {
         Label result = new Label();
         result.getElement().setProperty("innerHTML", "<h3>Ergebnisse</h3>");
 
-        layout.add(result, blank1, blank2);
+        layout.add(result, blank1, blank2, new Label("Satz 1"), new Label("Satz 2"), new Label("Satz 3 (optional)"));
 
-        if (isTeammatch) {
-            layout.add(setsTeam1, setsTeam2, blank3);
-        } else {
-            layout.add(setsPlayer1, setsPlayer2, blank3);
-        }
+        // create a HorizontalLayout for every set
+        HorizontalLayout set1 = new HorizontalLayout();
+        set1.add(set1Team1, new Label(":"), set1Team2);
+        HorizontalLayout set2 = new HorizontalLayout();
+        set2.add(set2Team1, new Label(":"), set2Team2);
+        HorizontalLayout set3 = new HorizontalLayout();
+        set3.add(set3Team1, new Label(":"), set3Team2);
 
         layout.add(set1, set2, set3);
-
         layout.setSizeFull();
         layout.setResponsiveSteps(new FormLayout.ResponsiveStep("22em", 3));
         return layout;
