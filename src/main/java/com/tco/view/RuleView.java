@@ -9,7 +9,7 @@ import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 
-@Route("rules")
+@Route("Regeln")
 public class RuleView extends VerticalLayout{
 
         //private final Label heading = new Label("Regeln zum Tenniskönig:");
