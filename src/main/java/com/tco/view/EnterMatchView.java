@@ -14,6 +14,7 @@ import com.vaadin.flow.router.Route;
 
 @Route("enterMatch")
 public class EnterMatchView extends VerticalLayout {
+    private final Label header = new Label();
     private final ComboBox player1 = new ComboBox("Spieler 1");
     private final ComboBox<String> player2 = new ComboBox("Spieler 2");
     private final ComboBox player3 = new ComboBox("Spieler 3");
@@ -34,22 +35,20 @@ public class EnterMatchView extends VerticalLayout {
         // testing purposes
         player2.setItems("Erwachsener");
 
-        add(getOneVsOne());
+        header.getElement().setProperty("innerHTML", "<h1>SPiel eintragen</h1>");
+        add(header);
+        add(header, getOneVsOne(), submit);
 
         teammatch.addValueChangeListener(valueChangeEvent -> {
             if (teammatch.getValue()) {
                 removeAll();
-                add(getTeammatch());
-                add(submit);
+                add(header, getTeammatch(),submit);
             }
             if (!teammatch.getValue()) {
                 removeAll();
-                add(getOneVsOne());
-                add(submit);
+                add(header, getOneVsOne(), submit);
             }
         });
-
-        add(submit);
     }
 
     /**
