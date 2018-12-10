@@ -32,6 +32,9 @@ public class EnterMatchView extends VerticalLayout {
 
 
     public EnterMatchView() {
+        //set all HTML IDs to simplifiy testing
+        setHtmlIds();
+
         // testing purposes
         player2.setItems("Erwachsener");
 
@@ -183,4 +186,22 @@ public class EnterMatchView extends VerticalLayout {
         layout.setResponsiveSteps(new FormLayout.ResponsiveStep("22em", 3));
         return layout;
     }
-}
+
+    /**
+     * sets all HTML IDs to simplify testing
+     */
+    private void setHtmlIds() {
+        player1.setId("player1");
+        player2.setId("player2");
+        player3.setId("player3");
+        player4.setId("player4");
+        teammatch.setId("teammatch");
+        set1Team1.setId("set1team1");
+        set1Team2.setId("set1team2");
+        set2Team1.setId("set2team1");
+        set2Team2.setId("set2team2");
+        set3Team1.setId("set3team1");
+        set3Team2.setId("set3team2");
+        timePlayed.setId("timePlayed");
+        submit.setId("submit");
+    }}
