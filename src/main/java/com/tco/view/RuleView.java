@@ -1,5 +1,6 @@
 package com.tco.view;
 
+import com.tco.GlobalVars;
 import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.formlayout.FormLayout;
@@ -9,7 +10,7 @@ import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 
-@Route("Regeln")
+@Route(GlobalVars.RouteRegeln)
 public class RuleView extends VerticalLayout{
 
         //private final Label heading = new Label("Regeln zum Tenniskönig:");

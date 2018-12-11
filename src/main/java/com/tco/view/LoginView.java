@@ -1,6 +1,7 @@
 package com.tco.view;
 
 
+import com.tco.GlobalVars;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.Text;
@@ -17,7 +18,7 @@ import java.util.Objects;
 
 import static com.vaadin.flow.component.UI.getCurrent;
 
-@Route("")
+@Route(GlobalVars.RouteLogin)
 @PageTitle("Login required")
 public class LoginView extends VerticalLayout {
     private final Text text = new Text("Login benötigt!");

@@ -1,5 +1,6 @@
 package com.tco.view;
 
+import com.tco.GlobalVars;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Label;
