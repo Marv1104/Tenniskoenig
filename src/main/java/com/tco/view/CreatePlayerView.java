@@ -25,6 +25,7 @@ public class CreatePlayerView extends VerticalLayout {
     private Grid<User> grid = new Grid<>();
 
     public CreatePlayerView() {
+        this.setSizeFull();
         header.getElement().setProperty("innerHTML", "<h1>Spieler erstellen");
 
         FormLayout userData = new FormLayout(vorname,nachname,geschlechtw);
@@ -32,8 +33,15 @@ public class CreatePlayerView extends VerticalLayout {
 
         add(header,userData, submit);
         submit.addClickListener(e -> {
-           userService.addUser(vorname.getValue(), nachname.getValue(), geschlechtw.getValue());
-           grid.setItems(userService.listAllUsers());
+            if(validFields()) {
+                userService.addUser(vorname.getValue(), nachname.getValue(), geschlechtw.getValue());
+                clearFields();
+                grid.setItems(userService.listAllUsers());
+                Notification.show("Alles hat geklappt");
+            }
+            else{
+                Notification.show("Da hat was nicht geklappt");
+            }
         });
         grid.setSizeFull();
         grid.addColumn(User::getId);
@@ -43,8 +51,21 @@ public class CreatePlayerView extends VerticalLayout {
 
         grid.setHeight("100vh");
         add(grid);
+    }
 
+    private boolean validFields(){
+        if(!vorname.getValue().isEmpty() & vorname.getValue().length()<20){
+            if(!nachname.getValue().isEmpty() & nachname.getValue().length()<20){
+                return true;
+            }
+        }
+        return false;
+    }
 
+    private void clearFields(){
+        vorname.setValue("");
+        nachname.setValue("");
+        geschlechtw.setValue(false);
     }
 
 }
