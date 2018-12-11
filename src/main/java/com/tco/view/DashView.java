@@ -9,7 +9,11 @@ public class DashView extends VerticalLayout {
     public DashView() {
         Label label = new Label("Hier steht was");
         Button button = new Button("Click me",
-                event -> HibernateManager.method());
+                event -> {
+            HibernateManager hibernate = new HibernateManager();
+            hibernate.method();
+                });
+
         add(label);
         add(button);
     }
