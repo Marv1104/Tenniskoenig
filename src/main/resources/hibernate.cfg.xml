@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+
+        <!-- connection to the database -->
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
+        <property name="hibernate.connection.driver_class">org.mariadb.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mariadb://tennis.dynv6.net:3306/TenniskoenigDB</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">hilfe</property>
+
+        <!-- autocommit false
+        <property name="hibernate.connection.autocommit">false</property>
+        -->
+
+        <!-- to display sql query generated when running the program
+        <property name="show_sql">true</property>
+        <property name="format_sql">true</property>
+        <property name="use_sql_comments">true</property>
+        -->
+
+        <!-- for jdbc transaction
+        <property name="hibernate.transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>
+        -->
+
+        <!-- mapping file -->
+        <!--
+        <mapping class="com.tco.model.Played"/>
+        <mapping class="com.tco.model.Game"/>
+        <mapping class="com.tco.model.User"/>
+        -->
+        <mapping resource="User.hbm.xml"/>
+        <mapping resource="Game.hbm.xml"/>
+        <mapping resource="Played.hbm.xml"/>
+
+    </session-factory>
+</hibernate-configuration>
