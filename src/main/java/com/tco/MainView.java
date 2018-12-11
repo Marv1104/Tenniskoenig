@@ -15,7 +15,7 @@ import org.hibernate.cfg.Configuration;
 /**
  * The main view contains a button and a click listener.
  */
-@Route("main")
+@Route("")
 public class MainView extends VerticalLayout {
 
     public MainView() {
@@ -26,7 +26,7 @@ public class MainView extends VerticalLayout {
         // Testing purposes
         Button enterMatch = new Button("Spiel eintragen");
         enterMatch.addClickListener(buttonClickEvent -> {
-            enterMatch.getUI().ifPresent(ui -> ui.navigate("enterMatch"));
+            enterMatch.getUI().ifPresent(ui -> ui.navigate(GlobalVars.RouteSpielEintrage));
         });
         add(enterMatch);
     }
