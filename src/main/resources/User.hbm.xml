@@ -7,7 +7,7 @@
     <class name = "com.tco.model.User" table = "user">
 
         <meta attribute = "class-description">
-            This class show the car detail, and mapping for the DB
+
         </meta>
 
         <id name = "id" type = "int" column = "id">

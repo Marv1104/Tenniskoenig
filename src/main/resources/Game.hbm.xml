@@ -22,7 +22,7 @@
         <property name = "gameSetTeam1" column = "gameSetTeam1" type = "int"/>
         <property name = "gameSetTeam2" column = "gameSetTeam2" type = "int"/>
         <property name = "gameDate" column = "gameDate" type = "date"/>
-        <property name = "playTime" column = "glayTime" type = "time"/>
+        <property name = "playTime" column = "playTime" type = "time"/>
 
     </class>
 </hibernate-mapping>

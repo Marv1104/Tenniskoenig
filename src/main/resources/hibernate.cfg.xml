@@ -6,7 +6,7 @@
     <session-factory>
 
         <!-- connection to the database -->
-        <property name="hibernate.dialect">org.hibernate.dialect.MariaDB103Dialect</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
         <property name="hibernate.connection.driver_class">org.mariadb.jdbc.Driver</property>
         <property name="hibernate.connection.url">jdbc:mariadb://tennis.dynv6.net:3306/TenniskoenigDB</property>
         <property name="hibernate.connection.username">root</property>

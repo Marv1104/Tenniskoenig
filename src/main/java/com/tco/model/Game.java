@@ -21,8 +21,7 @@ public class Game implements Serializable {
 
     public Game(){}
 
-    public Game(int gameID, int player1Team1, int player2Team2, int player3Team1, int player4Team2, String results, int gameSetTeam1, int gameSetTeam2, Date gameDate, Time playTime) {
-        this.gameID = gameID;
+    public Game(int player1Team1, int player2Team2, int player3Team1, int player4Team2, String results, int gameSetTeam1, int gameSetTeam2, Date gameDate, Time playTime) {
         this.player1Team1 = player1Team1;
         this.player2Team2 = player2Team2;
         this.player3Team1 = player3Team1;

@@ -1,5 +1,6 @@
 package com.tco.model;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -14,20 +15,28 @@ public class HibernateManager {
     private static SessionFactory factory;
 
 
-public void method() {
-    Configuration cfg = new Configuration();
-    cfg.configure("hibernate.cfg.xml");
-    factory = cfg.buildSessionFactory();
+    public void method() {
+        Configuration cfg = new Configuration();
+        cfg.configure("hibernate.cfg.xml");
+        factory = cfg.buildSessionFactory();
 
-    Session session = factory.openSession();
-    Transaction tx = session.beginTransaction();
+        Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
 
-    User user = new User("Sven", "Haala", false, false);
-    Integer id = (Integer) session.save(user);
-    //int k = 1;
-    //User user = (User) session.get(User.class, k);
-    //System.out.println(user.getNachname());
-    session.close();
-}
+        try {
+            User user = new User("Marvin", "Kubik", false, false);
+            Integer id = (Integer) session.save(user);
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null)
+                tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        //int k = 1;
+        //User user = (User) session.get(User.class, k);
+        //System.out.println(user.getNachname());
+    }
 
 }

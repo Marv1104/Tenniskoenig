@@ -1,18 +1,19 @@
 package com.tco.model;
 
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
 
 @Entity
 public class User implements Serializable {
 
-    private int id;
-    private String vorname;
-    private String nachname;
-    private boolean geschlechtw;
-    private boolean admin;
+    public int id;
+    public String vorname;
+    public String nachname;
+    public boolean geschlechtw;
+    public boolean admin;
 
     public User() {
     }
@@ -33,7 +34,6 @@ public class User implements Serializable {
         this.admin = admin;
     }
 
-    @Id
     public int getId() {
         return id;
     }
