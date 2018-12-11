@@ -72,7 +72,7 @@ public class GameService {
 
         try {
             tx = session.beginTransaction();
-            Played played = new Played(1,gameID, userID, points);
+            Played played = new Played(gameID, userID, points);
             playedID = (Integer) session.save(played);
             tx.commit();
         } catch (HibernateException e) {

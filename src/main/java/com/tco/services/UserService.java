@@ -65,7 +65,7 @@ public class UserService {
 
         try {
             tx = session.beginTransaction();
-            user = session.get(User.class, userID);
+            user = (User) session.get(User.class, userID);
             tx.commit();
         } catch (HibernateException e) {
             if (tx != null)
