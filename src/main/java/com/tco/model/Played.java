@@ -13,8 +13,7 @@ public class Played implements Serializable {
 
     public Played()    { }
 
-    public Played(int gameID, int userID, int points, int playedID) {
-        this.gameID = gameID;
+    public Played(int userID, int points, int playedID) {
         this.userID = userID;
         this.points = points;
         this.playedID = playedID;
