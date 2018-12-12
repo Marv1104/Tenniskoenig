@@ -4,8 +4,6 @@ import com.tco.GlobalVars;
 import com.tco.components.BlankLabel;
 import com.tco.services.GameService;
 import com.tco.services.UserService;
-import com.vaadin.flow.component.ClickEvent;
-import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.combobox.ComboBox;
@@ -17,8 +15,6 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 import com.tco.model.User;
 
-import javax.validation.constraints.Null;
-import java.sql.Date;
 import java.sql.Time;
 import java.util.Calendar;
 
@@ -44,6 +40,8 @@ public class EnterMatchView extends VerticalLayout {
     private UserService userService = new UserService();
 
     public EnterMatchView() {
+        HeaderView headerView = new HeaderView();
+        this.add(headerView);
         //set all HTML IDs to simplifiy testing
         setHtmlIds();
 
@@ -71,25 +69,30 @@ public class EnterMatchView extends VerticalLayout {
             int player1ID = player1.getValue().getId();
             int player2ID = player2.getValue().getId();
             int player3ID = 0;
-            if(player3.getValue() != null ) {
+            if (player3.getValue() != null) {
                 player3ID = player3.getValue().getId();
             }
             int player4ID = 0;
-            if(player4.getValue() != null ) {
+            if (player4.getValue() != null) {
                 player4ID = player4.getValue().getId();
             }
             String results = set1Team1.getValue() + ":" + set1Team2.getValue() + ";" + set2Team1.getValue()
                     + ":" + set2Team2.getValue() + ";" + set3Team1.getValue() + ":" + set3Team2.getValue();
-            int gameSetTeam1 = getGameSetTeam1();
-            int gameSetTeam2 = getGameSetTeam2();
+            int gameSetTeam1 = 0;
+            int gameSetTeam2 = 0;
+            if (player2ID != GlobalVars.ErwachsenerID) {
+                gameSetTeam1 = getGameSetTeam1();
+                gameSetTeam2 = getGameSetTeam2();
+            }
             java.sql.Date gameDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
             Time playTime = Time.valueOf("00:00:00");
-            if(userService.isAdult(player2.getValue().getId())) {
+            if (player2ID == GlobalVars.ErwachsenerID) {
                 playTime = Time.valueOf(timePlayed.getValue());
             }
-            gameService.setGame(player1ID,player2ID,player3ID,
-                    player4ID,results, gameSetTeam1,gameSetTeam2,gameDate,playTime);
-            gameService.evaluateGame(teammatch.getValue());
+            gameService.setGame(player1ID, player2ID, player3ID,
+                    player4ID, results, gameSetTeam1, gameSetTeam2, gameDate, playTime);
+            boolean adult = (player2ID == GlobalVars.ErwachsenerID);
+            gameService.evaluateGame(teammatch.getValue(), adult);
         });
 
     }
@@ -115,8 +118,8 @@ public class EnterMatchView extends VerticalLayout {
 
         layout.add(playerForm);
 
-        FormLayout resultForm = getResultForm(teammatch.getValue());
-        FormLayout timePlayedForm = getTimePLayed();
+        FormLayout resultForm = getResultForm();
+        FormLayout timePlayedForm = getTimePlayed();
         layout.add(resultForm);
         teammatch.addValueChangeListener(valueChangeEvent -> {
             changeResultForm(layout, resultForm, timePlayedForm);
@@ -170,7 +173,7 @@ public class EnterMatchView extends VerticalLayout {
         team2form.setResponsiveSteps(new FormLayout.ResponsiveStep("22em", 3));
         team2form.setSizeFull();
 
-        FormLayout resultForm = getResultForm(teammatch.getValue());
+        FormLayout resultForm = getResultForm();
 
         // add all forms to the layout
         layout.add(team1form, team2form, resultForm);
@@ -180,10 +183,9 @@ public class EnterMatchView extends VerticalLayout {
     /**
      * Creates a form for the results
      *
-     * @param isTeammatch indicates if match is a teammatch
      * @return Formlayout for results
      */
-    private FormLayout getResultForm(boolean isTeammatch) {
+    private FormLayout getResultForm() {
         //create blanks to use in the form
         BlankLabel blank1 = new BlankLabel();
         BlankLabel blank2 = new BlankLabel();
@@ -215,7 +217,7 @@ public class EnterMatchView extends VerticalLayout {
      *
      * @return FormLayout with the form for the played time
      */
-    private FormLayout getTimePLayed() {
+    private FormLayout getTimePlayed() {
         //create blanks to use in the form
         BlankLabel blank1 = new BlankLabel();
         BlankLabel blank2 = new BlankLabel();
@@ -247,14 +249,14 @@ public class EnterMatchView extends VerticalLayout {
     }
 
     private int getGameSetTeam1() {
-       int gameSet = 0;
-       if(Integer.valueOf(set1Team1.getValue()) > Integer.valueOf(set1Team2.getValue())) {
-           gameSet++;
-        }
-        if(Integer.valueOf(set2Team1.getValue()) > Integer.valueOf(set2Team2.getValue())) {
+        int gameSet = 0;
+        if (Integer.valueOf(set1Team1.getValue()) > Integer.valueOf(set1Team2.getValue())) {
             gameSet++;
         }
-        if (gameSet==1) { //3 Satz nur wenn davor unentschieden
+        if (Integer.valueOf(set2Team1.getValue()) > Integer.valueOf(set2Team2.getValue())) {
+            gameSet++;
+        }
+        if (gameSet == 1) { //3 Satz nur wenn davor unentschieden
             if (Integer.valueOf(set3Team1.getValue()) > Integer.valueOf(set3Team2.getValue())) {
                 gameSet++;
             }
@@ -264,13 +266,13 @@ public class EnterMatchView extends VerticalLayout {
 
     private int getGameSetTeam2() {
         int gameSet = 0;
-        if(Integer.valueOf(set1Team1.getValue()) < Integer.valueOf(set1Team2.getValue())) {
+        if (Integer.valueOf(set1Team1.getValue()) < Integer.valueOf(set1Team2.getValue())) {
             gameSet++;
         }
-        if(Integer.valueOf(set2Team1.getValue()) < Integer.valueOf(set2Team2.getValue())) {
+        if (Integer.valueOf(set2Team1.getValue()) < Integer.valueOf(set2Team2.getValue())) {
             gameSet++;
         }
-        if (gameSet==1) { //3 Satz nur wenn davor unentschieden
+        if (gameSet == 1) { //3 Satz nur wenn davor unentschieden
             if (Integer.valueOf(set3Team1.getValue()) < Integer.valueOf(set3Team2.getValue())) {
                 gameSet++;
             }

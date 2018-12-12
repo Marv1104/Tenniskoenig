@@ -30,8 +30,8 @@ public class HighscoreService {
         List<Played> played = new ArrayList<>();
         try {
             tx = session.beginTransaction();
-            played = session.createQuery("FROM Played WHERE UserID = " + userId
-                    + "AND GameID = " + gameId).list();
+            played = session.createQuery("FROM Played WHERE userID = " + userId
+                    + " AND gameID = " + gameId).list();
             tx.commit();
         } catch (HibernateException e) {
             if (tx != null)
@@ -40,6 +40,7 @@ public class HighscoreService {
         } finally {
             session.close();
         }
-        return played.get(0).getPoints();
+
+        return (played.size()>0)? played.get(0).getPoints() : 0;
     }
 }

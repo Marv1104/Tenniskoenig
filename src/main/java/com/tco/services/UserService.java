@@ -81,7 +81,6 @@ public class UserService {
     // sehr rudimentär checkt nur den namen
     // TODO verbesern
     public boolean isAdult(int userID) {
-        User user = getUserByID(userID);
-        return user.getVorname().equals(GlobalVars.VornameErwachsener);
+        return (userID == GlobalVars.ErwachsenerID);
     }
 }

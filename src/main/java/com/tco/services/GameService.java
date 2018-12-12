@@ -31,10 +31,10 @@ public class GameService {
      *
      * @param teammatch gibt an, ob teammatch
      */
-    public void evaluateGame(boolean teammatch) {
+    public void evaluateGame(boolean teammatch, boolean adult) {
         if (teammatch) {
             getPointsTeammatch();
-        } else if (userService.isAdult(game.getPlayer2Team2())) {
+        } else if (adult) {
             getPointsVsAdult();
         } else {
             getPointsOnevsOne();
@@ -107,7 +107,7 @@ public class GameService {
      * Punkte für Spiel gegen Erwachsenen verteilen
      */
     public void getPointsVsAdult() {
-        int pointsPlayer = (toMins(game.getPlayTime().toString()) % 15) * GamePoints.MIN15AGAINSTADULT.points;
+        int pointsPlayer = (toMins(game.getPlayTime().toString()) / 15) * GamePoints.MIN15AGAINSTADULT.points;
         addPlayedGame(game.getGameID(), game.getPlayer1Team1(), pointsPlayer);
     }
 
@@ -191,7 +191,6 @@ public class GameService {
     }
 
     /**
-     *
      * @param userId
      * @param matchtype oneVSone adult or team
      * @return
@@ -203,14 +202,20 @@ public class GameService {
 
         try {
             tx = session.beginTransaction();
-            if(matchtype.equals("oneVSone")) {
-                games = session.createQuery("FROM Game WHERE Player1Team1 = " + userId +"AND Player3Team1 = 0").list();
+            if (matchtype.equals("oneVSone")) {
+                games = session.createQuery("FROM Game WHERE Player1Team1 = " + userId
+                        + "AND Player3Team1 = 0 AND Player2Team2 != "+ GlobalVars.ErwachsenerID).list();
+                games.addAll(session.createQuery("FROM Game WHERE Player2Team2 = " + userId
+                        + "AND Player3Team1 = 0").list());
             }
-            if(matchtype.equals("team")) {
-                games = session.createQuery("FROM Game WHERE Player1Team1 = " + userId +"AND Player3Team1 != 0").list();
+            if (matchtype.equals("team")) {
+                games = session.createQuery("FROM Game WHERE Player1Team1 = " + userId + "AND Player3Team1 != 0").list();
+                games.addAll(session.createQuery("FROM Game WHERE Player2Team2 = " + userId + "AND Player3Team1 != 0").list());
+                games.addAll(session.createQuery("FROM Game WHERE Player3Team1 = " + userId + "AND Player3Team1 != 0").list());
+                games.addAll(session.createQuery("FROM Game WHERE Player4Team2 = " + userId + "AND Player3Team1 != 0").list());
             }
-            if(matchtype.equals("adult")) {
-                games = session.createQuery("FROM Game WHERE Player1Team1 = " + userId +"AND Player2Team2 = " + GlobalVars.ErwachsenerID).list();
+            if (matchtype.equals("adult")) {
+                games = session.createQuery("FROM Game WHERE Player1Team1 = " + userId + "AND Player2Team2 = " + GlobalVars.ErwachsenerID).list();
             }
             tx.commit();
         } catch (HibernateException e) {
