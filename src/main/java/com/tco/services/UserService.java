@@ -1,5 +1,6 @@
 package com.tco.services;
 
+import com.tco.GlobalVars;
 import com.tco.model.User;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -75,5 +76,11 @@ public class UserService {
             session.close();
         }
         return user;
+    }
+
+    // sehr rudimentär checkt nur den namen
+    // TODO verbesern
+    public boolean isAdult(int userID) {
+        return (userID == GlobalVars.ErwachsenerID);
     }
 }
