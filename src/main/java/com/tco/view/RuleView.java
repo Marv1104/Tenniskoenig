@@ -36,6 +36,7 @@ public class RuleView extends VerticalLayout{
                         "<li>Wer Spiele einträgt, die gar nicht stattgefunden haben, wird mit Punktabzug (min. <i>40 Punkte</i>) bestraft.</li>"+
                         "<li><b>Fair</b> geht vor!!!!</li>"+
                         "</ol>");
+                rules.setId("lblRules");
                 HeaderView headerView = new HeaderView();
                 this.add(headerView);
                 this.add(rules);

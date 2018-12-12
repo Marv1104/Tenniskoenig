@@ -5,6 +5,6 @@ Feature: viewRules
 
   Scenario: view the rules
     Given I am on the hompepage
-    When I click on element having id "viewRules"
+    When I click on element having id "btnRegeln"
     Then I am on the rules page
-    And element having id "rules" should be present
+    And element having id "lblRules" should be present

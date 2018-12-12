@@ -9,13 +9,14 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 public class DashView extends VerticalLayout {
     public DashView() {
         Label label = new Label("Hier steht was");
-        Button button = new Button("Regeln anschauen");
-        button.addClickListener(
+        Button btnRegeln = new Button("Regeln anschauen");
+        btnRegeln.setId("btnRegeln");
+        btnRegeln.addClickListener(
                 event -> {
-                    button.getUI().ifPresent(ui -> ui.navigate(GlobalVars.RouteRegeln));
+                    btnRegeln.getUI().ifPresent(ui -> ui.navigate(GlobalVars.RouteRegeln));
                 });
 
         add(label);
-        add(button);
+        add(btnRegeln);
     }
 }

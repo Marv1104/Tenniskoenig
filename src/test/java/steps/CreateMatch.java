@@ -1,9 +1,10 @@
-package testClasses;
+package steps;
 
 import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.openqa.selenium.By;
 
 public class CreateMatch {
 
@@ -26,12 +27,6 @@ public class CreateMatch {
 
     @When("^I uncheck checkbox having id \"([^\"]*)\"$")
     public void i_uncheck_checkbox_having_id(String arg1) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
-    }
-
-    @Then("^element having id \"([^\"]*)\" should be present$")
-    public void element_having_id_should_be_present(String arg1) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         throw new PendingException();
     }
