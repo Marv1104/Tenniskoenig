@@ -87,7 +87,8 @@ public class EnterMatchView extends VerticalLayout {
             if (userService.isAdult(player2.getValue().getId())) {
                 playTime = Time.valueOf(timePlayed.getValue());
             }
-            gameService.setGame(player1ID, player2ID, results, gameSetTeam1, gameSetTeam2, gameDate, playTime);
+            gameService.setGame(player1ID,player3ID,player2ID,
+                    player4ID,results, gameSetTeam1,gameSetTeam2,gameDate,playTime);
         });
     }
 
