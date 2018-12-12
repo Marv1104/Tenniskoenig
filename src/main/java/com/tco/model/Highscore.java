@@ -1,6 +1,6 @@
 package com.tco.model;
 
-public class Highscore {
+public class Highscore{
     private String name;
     private int position;
     private int points;
@@ -46,4 +46,7 @@ public class Highscore {
     public void setMatchesPlayed(int matchesPlayed) {
         this.matchesPlayed = matchesPlayed;
     }
+
+
+
 }
