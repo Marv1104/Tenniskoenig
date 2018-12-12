@@ -1,5 +1,6 @@
 package com.tco.services;
 
+import com.tco.GlobalVars;
 import com.tco.model.Game;
 import com.tco.model.Played;
 import com.tco.model.User;
@@ -127,7 +128,7 @@ public class GameService {
      * @param points
      * @return
      */
-    private Integer addPlayedGame(int gameID, int userID, int points) {
+    public Integer addPlayedGame(int gameID, int userID, int points) {
         Session session = factory.openSession();
         Transaction tx = null;
         Integer playedID = null;
@@ -186,14 +187,28 @@ public class GameService {
         return hoursInMins + mins;
     }
 
-    public List listAllGamesOfUser(int userId) {
+    /**
+     *
+     * @param userId
+     * @param matchtype oneVSone adult or team
+     * @return
+     */
+    public List listAllGamesOfUser(int userId, String matchtype) {
         List<Game> games = new ArrayList();
         Session session = factory.openSession();
         Transaction tx = null;
 
         try {
             tx = session.beginTransaction();
-            games = session.createQuery("FROM Game").list();
+            if(matchtype.equals("oneVSone")) {
+                games = session.createQuery("FROM Game WHERE Player1Team1 = " + userId +"AND Player3Team1 = 0").list();
+            }
+            if(matchtype.equals("team")) {
+                games = session.createQuery("FROM Game WHERE Player1Team1 = " + userId +"AND Player3Team1 != 0").list();
+            }
+            if(matchtype.equals("adult")) {
+                games = session.createQuery("FROM Game WHERE Player1Team1 = " + userId +"AND Player2Team2 = " + GlobalVars.ErwachsenerID).list();
+            }
             tx.commit();
         } catch (HibernateException e) {
             if (tx != null)

@@ -71,12 +71,12 @@ public class EnterMatchView extends VerticalLayout {
             int player1ID = player1.getValue().getId();
             int player2ID = player2.getValue().getId();
             int player3ID = 0;
-            if (player3.getValue() != null) {
+            if(player3.getValue() != null ) {
                 player3ID = player3.getValue().getId();
             }
             int player4ID = 0;
-            if (player4.getValue() != null) {
-                player4ID = player3.getValue().getId();
+            if(player4.getValue() != null ) {
+                player4ID = player4.getValue().getId();
             }
             String results = set1Team1.getValue() + ":" + set1Team2.getValue() + ";" + set2Team1.getValue()
                     + ":" + set2Team2.getValue() + ";" + set3Team1.getValue() + ":" + set3Team2.getValue();
@@ -84,12 +84,14 @@ public class EnterMatchView extends VerticalLayout {
             int gameSetTeam2 = getGameSetTeam2();
             java.sql.Date gameDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
             Time playTime = Time.valueOf("00:00:00");
-            if (userService.isAdult(player2.getValue().getId())) {
+            if(userService.isAdult(player2.getValue().getId())) {
                 playTime = Time.valueOf(timePlayed.getValue());
             }
-            gameService.setGame(player1ID,player3ID,player2ID,
+            gameService.setGame(player1ID,player2ID,player3ID,
                     player4ID,results, gameSetTeam1,gameSetTeam2,gameDate,playTime);
+            gameService.evaluateGame(teammatch.getValue());
         });
+
     }
 
     /**
@@ -245,33 +247,29 @@ public class EnterMatchView extends VerticalLayout {
     }
 
     private int getGameSetTeam1() {
-        int gameSet = 0;
-        if (Integer.valueOf(set1Team1.getValue()) > Integer.valueOf(set1Team2.getValue())) {
+       int gameSet = 0;
+       if(Integer.valueOf(set1Team1.getValue()) > Integer.valueOf(set1Team2.getValue())) {
+           gameSet++;
+        }
+        if(Integer.valueOf(set2Team1.getValue()) > Integer.valueOf(set2Team2.getValue())) {
             gameSet++;
         }
-        if (Integer.valueOf(set2Team1.getValue()) > Integer.valueOf(set2Team2.getValue())) {
+        if(Integer.valueOf(set3Team1.getValue()) > Integer.valueOf(set3Team2.getValue())) {
             gameSet++;
-        }
-        if (gameSet==1) { //3 Satz nur wenn davor unentschieden
-            if (Integer.valueOf(set3Team1.getValue()) > Integer.valueOf(set3Team2.getValue())) {
-                gameSet++;
-            }
         }
         return gameSet;
     }
 
     private int getGameSetTeam2() {
         int gameSet = 0;
-        if (Integer.valueOf(set1Team1.getValue()) < Integer.valueOf(set1Team2.getValue())) {
+        if(Integer.valueOf(set1Team1.getValue()) < Integer.valueOf(set1Team2.getValue())) {
             gameSet++;
         }
-        if (Integer.valueOf(set2Team1.getValue()) < Integer.valueOf(set2Team2.getValue())) {
+        if(Integer.valueOf(set2Team1.getValue()) < Integer.valueOf(set2Team2.getValue())) {
             gameSet++;
         }
-        if (gameSet==1) { //3 Satz nur wenn davor unentschieden
-            if (Integer.valueOf(set3Team1.getValue()) < Integer.valueOf(set3Team2.getValue())) {
-                gameSet++;
-            }
+        if(Integer.valueOf(set3Team1.getValue()) < Integer.valueOf(set3Team2.getValue())) {
+            gameSet++;
         }
         return gameSet;
     }
