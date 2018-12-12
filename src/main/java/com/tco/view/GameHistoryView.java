@@ -36,6 +36,7 @@ public class GameHistoryView extends VerticalLayout {
         add(gameHistory, user);
         this.setSizeFull();
 
+        oneVSoneGames.setId("gridOneVsOneGames");
         oneVSoneGames.setSizeFull();
         oneVSoneGames.addColumn(PlayedGame::getPlayer1).setHeader("Spieler 1");
         oneVSoneGames.addColumn(PlayedGame::getPlayer2).setHeader("Spieler 2");

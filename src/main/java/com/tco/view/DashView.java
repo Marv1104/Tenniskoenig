@@ -15,8 +15,18 @@ public class DashView extends VerticalLayout {
                 event -> {
                     btnRegeln.getUI().ifPresent(ui -> ui.navigate(GlobalVars.RouteRegeln));
                 });
-
+        Button btnMatchHistory = new Button("Zeige Matchverlauf");
+        btnMatchHistory.setId("btnMatchHistory");
+        btnMatchHistory.addClickListener(event ->
+                btnMatchHistory.getUI().ifPresent(ui -> ui.navigate(GlobalVars.RouteGameHistory)));
+        // Testing purposes
+        Button enterMatch = new Button("Spiel eintragen");
+        enterMatch.addClickListener(buttonClickEvent -> {
+            enterMatch.getUI().ifPresent(ui -> ui.navigate(GlobalVars.RouteSpielEintrage));
+        });
         add(label);
         add(btnRegeln);
+        add(btnMatchHistory);
+        add(enterMatch);
     }
 }
