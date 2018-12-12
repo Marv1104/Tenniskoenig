@@ -174,6 +174,7 @@ public class EnterMatchView extends VerticalLayout {
         team2form.setSizeFull();
 
         FormLayout resultForm = getResultForm();
+        resultForm.setId("matchHistoryForm");
 
         // add all forms to the layout
         layout.add(team1form, team2form, resultForm);
