@@ -16,6 +16,7 @@ public class ViewRules {
     private String url = "http://localhost:8080/";
     private String targetUrl = "http://localhost:8080/Regeln";
     public ViewRules(){
+        //Driver muss heruntergeladen werden und der Pfad entsprechend geändert werden
         System.setProperty("webdriver.gecko.driver", "D:/Downloads/geckodriver-v0.23.0-win64/geckodriver.exe");
         webDriver = new FirefoxDriver();
         webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
