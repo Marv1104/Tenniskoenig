@@ -33,6 +33,16 @@ public class Game implements Serializable {
         this.playTime = playTime;
     }
 
+    public Game(int player1Team1, int player2Team2, String results, int gameSetTeam1, int gameSetTeam2, Date gameDate, Time playTime) {
+        this.player1Team1 = player1Team1;
+        this.player2Team2 = player2Team2;
+        this.results = results;
+        this.gameSetTeam1 = gameSetTeam1;
+        this.gameSetTeam2 = gameSetTeam2;
+        this.gameDate = gameDate;
+        this.playTime = playTime;
+    }
+
     @Id
     public int getGameID() {
         return gameID;

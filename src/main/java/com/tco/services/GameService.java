@@ -50,6 +50,13 @@ public class GameService {
         addGame(game);
     }
 
+    public void setGame(int player1Team1, int player2Team2, String results,
+                        int gameSetTeam1, int gameSetTeam2, Date gameDate, Time playTime) {
+        this.game = new Game(player1Team1, player2Team2, results,
+                gameSetTeam1, gameSetTeam2, gameDate, playTime);
+        addGame(game);
+    }
+
     /**
      * Punkte für ein Teammatch vergeben
      */
