@@ -8,6 +8,8 @@ public final class GlobalVars {
     public static final String RouteSpielerErstellen = "SpielerErstellen";
     public static final String RouteRegeln = "Regeln";
     public static final String RouteLogin = "login";
-
+public static final String RouteGameHistory = "SpielHistorie";
+    // Vorname des Erwachsenen Spieler für primitive checks
+    public static final String VornameErwachsener = "Erwachsener ";
 
 }

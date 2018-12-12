@@ -2,6 +2,9 @@ package com.tco.view;
 
 import com.tco.GlobalVars;
 import com.tco.components.BlankLabel;
+import com.tco.services.GameService;
+import com.tco.services.UserService;
+import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.checkbox.Checkbox;
@@ -12,14 +15,20 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
+import com.tco.model.User;
+
+import javax.validation.constraints.Null;
+import java.sql.Date;
+import java.sql.Time;
+import java.util.Calendar;
 
 @Route(GlobalVars.RouteSpielEintrage)
 public class EnterMatchView extends VerticalLayout {
     private final Label header = new Label();
-    private final ComboBox player1 = new ComboBox("Spieler 1");
-    private final ComboBox<String> player2 = new ComboBox("Spieler 2");
-    private final ComboBox player3 = new ComboBox("Spieler 3");
-    private final ComboBox player4 = new ComboBox("Spieler 4");
+    private final ComboBox<User> player1 = new ComboBox("Spieler 1");
+    private final ComboBox<User> player2 = new ComboBox("Spieler 2");
+    private final ComboBox<User> player3 = new ComboBox("Spieler 3");
+    private final ComboBox<User> player4 = new ComboBox("Spieler 4");
     private final Checkbox teammatch = new Checkbox("Doppel");
     private final TextField set1Team1 = new TextField();
     private final TextField set1Team2 = new TextField();
@@ -27,31 +36,59 @@ public class EnterMatchView extends VerticalLayout {
     private final TextField set2Team2 = new TextField();
     private final TextField set3Team1 = new TextField();
     private final TextField set3Team2 = new TextField();
-    private final TextField timePlayed = new TextField();
+    private final TextField timePlayed = new TextField("Gespielte Zeit");
+    private GameService gameService = new GameService();
 
     private Button submit = new Button("Spiel eintragen");
 
+    private UserService userService = new UserService();
 
     public EnterMatchView() {
         //set all HTML IDs to simplifiy testing
         setHtmlIds();
 
-        // testing purposes
-        player2.setItems("Erwachsener");
+        // set items in Combooxes
+        player1.setItems(userService.listAllUsers());
+        player2.setItems(userService.listAllUsers());
+        player3.setItems(userService.listAllUsers());
+        player4.setItems(userService.listAllUsers());
 
-        header.getElement().setProperty("innerHTML", "<h1>SPiel eintragen</h1>");
+        header.getElement().setProperty("innerHTML", "<h1>Spiel eintragen</h1>");
         add(header);
         add(header, getOneVsOne(), submit);
 
         teammatch.addValueChangeListener(valueChangeEvent -> {
             if (teammatch.getValue()) {
                 removeAll();
-                add(header, getTeammatch(),submit);
+                add(header, getTeammatch(), submit);
             }
             if (!teammatch.getValue()) {
                 removeAll();
                 add(header, getOneVsOne(), submit);
             }
+        });
+        submit.addClickListener(ClickEvent -> {
+            int player1ID = player1.getValue().getId();
+            int player2ID = player2.getValue().getId();
+            int player3ID = 0;
+            if(player3.getValue() != null ) {
+                player3ID = player3.getValue().getId();
+            }
+            int player4ID = 0;
+            if(player4.getValue() != null ) {
+                player4ID = player3.getValue().getId();
+            }
+            String results = set1Team1.getValue() + ":" + set1Team2.getValue() + ";" + set2Team1.getValue()
+                    + ":" + set2Team2.getValue() + ";" + set3Team1.getValue() + ":" + set3Team2.getValue();
+            int gameSetTeam1 = getGameSetTeam1();
+            int gameSetTeam2 = getGameSetTeam2();
+            java.sql.Date gameDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+            Time playTime = Time.valueOf("00:00:00");
+            if(userService.isAdult(player2.getValue().getId())) {
+                playTime = Time.valueOf(timePlayed.getValue());
+            }
+            gameService.setGame(player1ID,player3ID,player2ID,
+                    player4ID,results, gameSetTeam1,gameSetTeam2,gameDate,playTime);
         });
     }
 
@@ -90,7 +127,7 @@ public class EnterMatchView extends VerticalLayout {
     }
 
     private void changeResultForm(VerticalLayout layout, FormLayout resultForm, FormLayout timePlayedForm) {
-        if (player2.getValue() == "Erwachsener") {
+        if (player2.getValue().getVorname().equals(GlobalVars.VornameErwachsener)) {
             layout.remove(resultForm);
             layout.add(timePlayedForm);
         } else {
@@ -205,4 +242,33 @@ public class EnterMatchView extends VerticalLayout {
         set3Team2.setId("set3team2");
         timePlayed.setId("timePlayed");
         submit.setId("submit");
-    }}
+    }
+
+    private int getGameSetTeam1() {
+       int gameSet = 0;
+       if(Integer.valueOf(set1Team1.getValue()) > Integer.valueOf(set1Team2.getValue())) {
+           gameSet++;
+        }
+        if(Integer.valueOf(set2Team1.getValue()) > Integer.valueOf(set2Team2.getValue())) {
+            gameSet++;
+        }
+        if(Integer.valueOf(set3Team1.getValue()) > Integer.valueOf(set3Team2.getValue())) {
+            gameSet++;
+        }
+        return gameSet;
+    }
+
+    private int getGameSetTeam2() {
+        int gameSet = 0;
+        if(Integer.valueOf(set1Team1.getValue()) < Integer.valueOf(set1Team2.getValue())) {
+            gameSet++;
+        }
+        if(Integer.valueOf(set2Team1.getValue()) < Integer.valueOf(set2Team2.getValue())) {
+            gameSet++;
+        }
+        if(Integer.valueOf(set3Team1.getValue()) < Integer.valueOf(set3Team2.getValue())) {
+            gameSet++;
+        }
+        return gameSet;
+    }
+}

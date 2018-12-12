@@ -65,4 +65,9 @@ public class User implements Serializable {
     public void setGeschlechtw(boolean geschlechtW) {
         this.geschlechtw = geschlechtW;
     }
+
+    @Override
+    public String toString() {
+        return vorname + " " + nachname;
+    }
 }
