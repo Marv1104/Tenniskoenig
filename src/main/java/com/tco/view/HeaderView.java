@@ -39,10 +39,10 @@ public class HeaderView extends HorizontalLayout {
         Button btnHome = new Button("Home");
         btnHome.addClickListener(event -> btnHome.getUI().ifPresent(ui -> ui.navigate(GlobalVars.RouteHome)));
         horizontalLayout.add(btnHome);
-        Button btnSpielerErstellen = new Button("SpielerErstellen");
+        Button btnSpielerErstellen = new Button("Spieler erstellen");
         btnSpielerErstellen.addClickListener(event -> btnHome.getUI().ifPresent(ui -> ui.navigate(GlobalVars.RouteSpielerErstellen)));
         horizontalLayout.add(btnSpielerErstellen);
-        Button btnSpielErstellen = new Button("SpielErstellen");
+        Button btnSpielErstellen = new Button("Spiel erstellen");
         btnSpielErstellen.addClickListener(event -> btnHome.getUI().ifPresent(ui -> ui.navigate(GlobalVars.RouteSpielEintrage)));
         horizontalLayout.add(btnSpielErstellen);
         return horizontalLayout;
