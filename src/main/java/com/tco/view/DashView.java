@@ -9,13 +9,24 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 public class DashView extends VerticalLayout {
     public DashView() {
         Label label = new Label("Hier steht was");
-        Button button = new Button("Regeln anschauen");
-        button.addClickListener(
+        Button btnRegeln = new Button("Regeln anschauen");
+        btnRegeln.setId("btnRegeln");
+        btnRegeln.addClickListener(
                 event -> {
-                    button.getUI().ifPresent(ui -> ui.navigate(GlobalVars.RouteRegeln));
+                    btnRegeln.getUI().ifPresent(ui -> ui.navigate(GlobalVars.RouteRegeln));
                 });
-
+        Button btnMatchHistory = new Button("Zeige Matchverlauf");
+        btnMatchHistory.setId("btnMatchHistory");
+        btnMatchHistory.addClickListener(event ->
+                btnMatchHistory.getUI().ifPresent(ui -> ui.navigate(GlobalVars.RouteGameHistory)));
+        // Testing purposes
+        Button enterMatch = new Button("Spiel eintragen");
+        enterMatch.addClickListener(buttonClickEvent -> {
+            enterMatch.getUI().ifPresent(ui -> ui.navigate(GlobalVars.RouteSpielEintrage));
+        });
         add(label);
-        add(button);
+        add(btnRegeln);
+        add(btnMatchHistory);
+        add(enterMatch);
     }
 }

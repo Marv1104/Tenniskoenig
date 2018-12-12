@@ -23,11 +23,5 @@ public class MainView extends VerticalLayout {
         DashView dashView = new DashView();
         add(headerView);
         add(dashView);
-        // Testing purposes
-        Button enterMatch = new Button("Spiel eintragen");
-        enterMatch.addClickListener(buttonClickEvent -> {
-            enterMatch.getUI().ifPresent(ui -> ui.navigate(GlobalVars.RouteSpielEintrage));
-        });
-        add(enterMatch);
     }
 }
