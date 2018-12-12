@@ -32,6 +32,8 @@ public class HeaderView extends HorizontalLayout {
         setAlignItems(Alignment.CENTER);
         btnLogout.addClickListener(buttonClickEvent ->
                 btnLogout.getUI().ifPresent(ui -> ui.navigate(GlobalVars.RouteHome)));
+
+        this.setHeight("10vh");
     }
 
     private HorizontalLayout getLinks() {
@@ -40,11 +42,17 @@ public class HeaderView extends HorizontalLayout {
         btnHome.addClickListener(event -> btnHome.getUI().ifPresent(ui -> ui.navigate(GlobalVars.RouteHome)));
         horizontalLayout.add(btnHome);
         Button btnSpielerErstellen = new Button("Spieler erstellen");
-        btnSpielerErstellen.addClickListener(event -> btnHome.getUI().ifPresent(ui -> ui.navigate(GlobalVars.RouteSpielerErstellen)));
+        btnSpielerErstellen.addClickListener(event -> btnSpielerErstellen.getUI().ifPresent(ui -> ui.navigate(GlobalVars.RouteSpielerErstellen)));
         horizontalLayout.add(btnSpielerErstellen);
         Button btnSpielErstellen = new Button("Spiel erstellen");
-        btnSpielErstellen.addClickListener(event -> btnHome.getUI().ifPresent(ui -> ui.navigate(GlobalVars.RouteSpielEintrage)));
+        btnSpielErstellen.addClickListener(event -> btnSpielErstellen.getUI().ifPresent(ui -> ui.navigate(GlobalVars.RouteSpielEintrage)));
         horizontalLayout.add(btnSpielErstellen);
+        Button btnBestenliste = new Button("Bestenliste");
+        btnBestenliste.addClickListener(event -> btnBestenliste.getUI().ifPresent(ui -> ui.navigate(GlobalVars.RouteHighscores)));
+        horizontalLayout.add(btnBestenliste);
+        Button btnRegeln = new Button("Regeln");
+        btnRegeln.addClickListener(event -> btnRegeln.getUI().ifPresent(ui -> ui.navigate(GlobalVars.RouteRegeln)));
+        horizontalLayout.add(btnRegeln);
         return horizontalLayout;
     }
 }

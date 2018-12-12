@@ -25,6 +25,7 @@ public class CreatePlayerView extends VerticalLayout {
     private Grid<User> grid = new Grid<>();
 
     public CreatePlayerView() {
+        add(new HeaderView());
         this.setSizeFull();
         header.getElement().setProperty("innerHTML", "<h1>Spieler erstellen");
 
