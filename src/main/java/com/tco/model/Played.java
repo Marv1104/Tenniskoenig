@@ -2,11 +2,14 @@ package com.tco.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import java.io.Serializable;
 
 @Entity
 public class Played implements Serializable {
+    @ManyToOne
     private int gameID;
+    @ManyToOne
     private int userID;
     private int points;
     private int playedID;
@@ -19,7 +22,6 @@ public class Played implements Serializable {
         this.playedID = playedID;
     }
 
-@Id
     public int getGameID() {
         return gameID;
     }

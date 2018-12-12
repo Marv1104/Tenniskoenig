@@ -135,7 +135,10 @@ public class GameService {
 
         try {
             tx = session.beginTransaction();
-            Played played = new Played(gameID, userID, points);
+            Played played = new Played();
+            played.setGameID(gameID);
+            played.setUserID(userID);
+            played.setPoints(points);
             playedID = (Integer) session.save(played);
             tx.commit();
         } catch (HibernateException e) {

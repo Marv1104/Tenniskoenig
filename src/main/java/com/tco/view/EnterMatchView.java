@@ -254,8 +254,10 @@ public class EnterMatchView extends VerticalLayout {
         if(Integer.valueOf(set2Team1.getValue()) > Integer.valueOf(set2Team2.getValue())) {
             gameSet++;
         }
-        if(Integer.valueOf(set3Team1.getValue()) > Integer.valueOf(set3Team2.getValue())) {
-            gameSet++;
+        if (gameSet==1) { //3 Satz nur wenn davor unentschieden
+            if (Integer.valueOf(set3Team1.getValue()) > Integer.valueOf(set3Team2.getValue())) {
+                gameSet++;
+            }
         }
         return gameSet;
     }
@@ -268,8 +270,10 @@ public class EnterMatchView extends VerticalLayout {
         if(Integer.valueOf(set2Team1.getValue()) < Integer.valueOf(set2Team2.getValue())) {
             gameSet++;
         }
-        if(Integer.valueOf(set3Team1.getValue()) < Integer.valueOf(set3Team2.getValue())) {
-            gameSet++;
+        if (gameSet==1) { //3 Satz nur wenn davor unentschieden
+            if (Integer.valueOf(set3Team1.getValue()) < Integer.valueOf(set3Team2.getValue())) {
+                gameSet++;
+            }
         }
         return gameSet;
     }
