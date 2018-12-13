@@ -50,6 +50,12 @@ public class HeaderView extends HorizontalLayout {
         Button btnBestenliste = new Button("Bestenliste");
         btnBestenliste.addClickListener(event -> btnBestenliste.getUI().ifPresent(ui -> ui.navigate(GlobalVars.RouteHighscores)));
         horizontalLayout.add(btnBestenliste);
+
+        Button btnMatchHistory = new Button("Zeige Matchverlauf");
+        btnMatchHistory.setId("btnMatchHistory");
+        btnMatchHistory.addClickListener(event ->
+                btnMatchHistory.getUI().ifPresent(ui -> ui.navigate(GlobalVars.RouteGameHistory)));
+        horizontalLayout.add(btnMatchHistory);
         Button btnRegeln = new Button("Regeln");
         btnRegeln.addClickListener(event -> btnRegeln.getUI().ifPresent(ui -> ui.navigate(GlobalVars.RouteRegeln)));
         horizontalLayout.add(btnRegeln);
