@@ -15,7 +15,7 @@ import org.hibernate.cfg.Configuration;
 /**
  * The main view contains a button and a click listener.
  */
-@Route("")
+@Route(GlobalVars.RouteHome)
 public class MainView extends VerticalLayout {
 
     public MainView() {
