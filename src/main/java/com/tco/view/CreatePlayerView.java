@@ -55,12 +55,13 @@ public class CreatePlayerView extends VerticalLayout {
     }
 
     private boolean validFields(){
-        if(!vorname.getValue().isEmpty() & vorname.getValue().length()<20){
-            if(!nachname.getValue().isEmpty() & nachname.getValue().length()<20){
-                return true;
-            }
+        if(vorname.getValue().isEmpty() & vorname.getValue().length()<20){
+            return false;
         }
-        return false;
+        if(nachname.getValue().isEmpty() & nachname.getValue().length()<20){
+            return false;
+        }
+        return true;
     }
 
     private void clearFields(){
